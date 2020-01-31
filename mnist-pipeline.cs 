@@ -1,0 +1,21 @@
+// using System;
+// using Microsoft.ML; // MLContext
+// using Microsoft.ML.Data; //VectorType
+// using System.IO; // Data pathing >:(
+
+var pipeline = context.Transforms.Concatenate(
+    DefaultColumnNames.Features,
+    nameof(Digit.PixelValues))
+
+
+    .AppendCacheCheckpoint(context)
+
+    .Append(context.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(
+        labelColumnName: "Number",
+        featureColumnName: DefaultColumnNames.Features));
+
+
+
+    // Train 
+
+
